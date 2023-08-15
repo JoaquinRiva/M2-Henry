@@ -1,5 +1,6 @@
 // Crear un array vacío llamado 'toDoItems'
 // Tu codigo acá:
+const toDoItems = [];
 
 // En la página 'index.html' hay un elemento span cuyo texto es 'Aplicación creada por:'.
 // Usando querySelector seleccionar dicho span por su id ('createdBy') y luego usando innerHTML
@@ -36,11 +37,7 @@ ToDo.prototype.completeToDo = function () {
 // Agregar dos parámetros a la función 'buildToDo':
 //    1) Un objeto de la clase ToDo
 //    2) Index numérico
-const toDoItems = [
-  new ToDo("Hacer compras"),
-  new ToDo("Estudiar para el examen"),
- 
-];
+
 //
 // La función debe realizar lo siguiente:
 //    1) Crear un elemento 'div' y asignárselo a una variable denominada 'toDoShell'
@@ -68,7 +65,7 @@ function buildToDo(todo, index) {
   toDoText.innerHTML = todo.description;
 
   // Asignar el ID del span con el valor del índice
-  toDoText.id = index.toString();
+  toDoText.id = index;
 
   // Añadir clases según el estado de complete en el objeto ToDo
   if (todo.complete) {
@@ -133,7 +130,17 @@ function displayToDos() {
 //  4) Llamar a la función displayToDos para que se actualicen los toDos mostrados en pantalla
 
 function addToDo() {
-  // Tu código acá:
+
+  let description = document.getElementById("toDoInput").value;
+
+  let tarea = new ToDo(description);
+
+  toDoItems.push(tarea)
+
+  let inpt = document.getElementById("toDoInput")
+  inpt.value = ""
+
+  displayToDos()
 }
 
 // Agregar un 'Event Listener' para que cada vez que el botón 'AGREGAR' sea clickeado
@@ -142,6 +149,11 @@ function addToDo() {
 //   2) Agregarle un 'click' event listener, pasándole la función 'addToDo' como callback
 
 // Tu código acá:
+// Seleccionar el elemento 'addButton'
+const addButton = document.getElementById('addButton');
+
+// Agregar un event listener al botón
+addButton.addEventListener('click', addToDo);
 
 // La función completeToDo se va a ejecutar cuando queramos completar un todo
 // [NOTA: Algunas cuestiones a tener en cuenta
@@ -157,8 +169,9 @@ function addToDo() {
 
 function completeToDo(event) {
   // DESCOMENTAR LA SIGUIENTE LINEA
-  //const index = event.target.id;
+  const index = event.target.id;
   // Tu código acá:
+  toDoItems[index].completeToDo(); 
 }
 
 // Una vez que llegaste a este punto verificá que todos los tests pasen
