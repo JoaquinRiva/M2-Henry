@@ -9,13 +9,43 @@ var traverseDomAndCollectElements = function (matchFunc, startEl) {
   // usa matchFunc para identificar elementos que matchien
 
   // TU CÓDIGO AQUÍ
+  function traverse(element) {
+    if (matchFunc(element)) {
+      resultSet.push(element);
+    }
+    for (var i = 0; i < element.children.length; i++) {
+      traverse(element.children[i]);
+    }
+  }
+
+  traverse(startEl);
+
+  return resultSet;
+
 };
 
 // Detecta y devuelve el tipo de selector
 // devuelve uno de estos tipos: id, class, tag.class, tag
 
+
+// En esta implementación, se utilizan los métodos startsWith() e includes() para detectar los diferentes tipos de selectores. Algunos ejemplos de cómo funcionaría esta implementación:
+
+// selectorTypeMatcher("#myId") devolverá "id".
+// selectorTypeMatcher(".myClass") devolverá "class".
+// selectorTypeMatcher("div.myClass") devolverá "tag.class".
+// selectorTypeMatcher("div") devolverá "tag"
+
 var selectorTypeMatcher = function (selector) {
   // tu código aquí
+  if (selector.startsWith("#")) {
+    return "id";
+  } else if (selector.startsWith(".")) {
+    return "class";
+  } else if (selector.includes(".")) {
+    return "tag.class";
+  } else {
+    return "tag";
+  }
 };
 
 // NOTA SOBRE LA FUNCIÓN MATCH
