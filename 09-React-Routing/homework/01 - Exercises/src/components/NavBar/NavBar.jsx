@@ -1,6 +1,7 @@
 import React from "react";
 import logoHenry from "../../assets/logo-henry.png";
 import styleNav from "./NavBar.module.css";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
   return (
@@ -14,10 +15,24 @@ export default function NavBar() {
         </li>
         <div className={styleNav.options}>
           <li>
-            <span>Navieras</span>
+            <NavLink exact to="/">
+              <span>Inicio</span>
+            </NavLink>
           </li>
           <li>
-            <span>Promociones</span>
+            <NavLink to="/shipping">
+              <span>Navieras</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/discounts"
+              className={({ isActive }) =>
+                isActive ? styleNav.active : styleNav.disable
+              }
+            >
+              <span>Promociones</span>
+            </NavLink>
           </li>
         </div>
       </ul>
